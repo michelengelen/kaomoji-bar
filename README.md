@@ -4,6 +4,8 @@ A macOS menu bar kaomoji picker. Click the `ツ` icon in the menu bar.
 Type to search. Click a kaomoji to copy it to the clipboard.
 
 - SwiftUI `MenuBarExtra` (window style), no dependencies.
+- Liquid Glass search and footer bars on macOS 26. Older systems fall
+  back to standard translucent materials.
 - 103 kaomoji in 6 categories, plus a "Recently used" section
   (stored in `UserDefaults`).
 - Press Return to copy the first search match.

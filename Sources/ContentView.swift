@@ -36,44 +36,46 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack(spacing: 10) {
-            TextField("Search: shrug, cat, flip…", text: $searchText)
-                .textFieldStyle(.roundedBorder)
-                .focused($searchFocused)
-                .onSubmit {
-                    if let first = results?.first {
-                        copy(first)
-                    }
-                }
-            ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    if let results {
-                        if results.isEmpty {
-                            Text("No matches")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        } else {
-                            section(
-                                results.count == 1 ? "1 match" : "\(results.count) matches",
-                                items: results
-                            )
-                        }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 14) {
+                if let results {
+                    if results.isEmpty {
+                        Text("No matches")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 24)
                     } else {
-                        if !recents.isEmpty {
-                            section("Recently used", items: recents)
-                        }
-                        ForEach(categoryOrder, id: \.self) { category in
-                            section(category, items: allKaomoji.filter { $0.category == category })
-                        }
+                        section(
+                            results.count == 1 ? "1 match" : "\(results.count) matches",
+                            items: results
+                        )
+                    }
+                } else {
+                    if !recents.isEmpty {
+                        section("Recently used", items: recents)
+                    }
+                    ForEach(categoryOrder, id: \.self) { category in
+                        section(category, items: allKaomoji.filter { $0.category == category })
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.trailing, 4)
             }
-            Divider()
-            footer
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 6)
         }
-        .padding(12)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            searchBar
+                .padding(.horizontal, 12)
+                .padding(.top, 12)
+                .padding(.bottom, 6)
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            footerBar
+                .padding(.horizontal, 12)
+                .padding(.top, 6)
+                .padding(.bottom, 12)
+        }
         .frame(width: 360, height: 460)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -82,13 +84,75 @@ struct ContentView: View {
         }
     }
 
+    private var searchBar: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+            TextField("Search: shrug, cat, flip…", text: $searchText)
+                .textFieldStyle(.plain)
+                .focused($searchFocused)
+                .onSubmit {
+                    if let first = results?.first {
+                        copy(first)
+                    }
+                }
+            if !searchText.isEmpty {
+                Button {
+                    searchText = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 7)
+        .glassBar()
+    }
+
+    private var footerBar: some View {
+        HStack(spacing: 8) {
+            if let copied {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.green)
+                Text(copied.chars).font(.system(size: 13))
+                Text("copied").font(.caption).foregroundStyle(.secondary)
+            } else if let hovered {
+                Text(hovered.chars).font(.system(size: 13))
+                Text(hovered.name).font(.caption).foregroundStyle(.secondary)
+            } else {
+                Text("Click a kaomoji to copy it")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+            Button {
+                NSApp.terminate(nil)
+            } label: {
+                Image(systemName: "power")
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+            .help("Quit Kaomoji Bar")
+            .keyboardShortcut("q")
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .glassBar()
+    }
+
     private func section(_ title: String, items: [Kaomoji]) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title.uppercased())
                 .font(.system(size: 10, weight: .semibold))
                 .kerning(0.6)
-                .foregroundStyle(.secondary)
-            FlowLayout(spacing: 6) {
+                .foregroundStyle(.tertiary)
+            FlowLayout(spacing: 4) {
                 ForEach(items) { item in
                     ChipButton(item: item) {
                         copy(item)
@@ -102,29 +166,6 @@ struct ContentView: View {
                 }
             }
         }
-    }
-
-    private var footer: some View {
-        HStack(spacing: 8) {
-            if let copied {
-                Text(copied.chars).font(.system(size: 14))
-                Text("copied").font(.caption).foregroundStyle(.secondary)
-            } else if let hovered {
-                Text(hovered.chars).font(.system(size: 14))
-                Text(hovered.name).font(.caption).foregroundStyle(.secondary)
-            } else {
-                Text("Click a kaomoji to copy it")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            Spacer()
-            Button("Quit") { NSApp.terminate(nil) }
-                .buttonStyle(.plain)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .keyboardShortcut("q")
-        }
-        .frame(height: 20)
     }
 
     private func copy(_ item: Kaomoji) {
@@ -158,22 +199,42 @@ private struct ChipButton: View {
             Text(item.chars)
                 .font(.system(size: 13))
                 .lineLimit(1)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 5)
-                .background(
-                    RoundedRectangle(cornerRadius: 7)
-                        .fill(isHovering ? Color.primary.opacity(0.1) : Color.clear)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .strokeBorder(Color.primary.opacity(isHovering ? 0.35 : 0.15))
-                )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ChipButtonStyle(isHovering: isHovering))
         .help(item.name)
         .onHover { hovering in
             isHovering = hovering
             onHover(hovering)
+        }
+    }
+}
+
+/// Borderless capsule chip: invisible at rest, subtle fill on hover,
+/// small scale-down while pressed.
+private struct ChipButtonStyle: ButtonStyle {
+    let isHovering: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.horizontal, 9)
+            .padding(.vertical, 5)
+            .background(
+                isHovering ? AnyShapeStyle(.quaternary) : AnyShapeStyle(.clear),
+                in: Capsule()
+            )
+            .contentShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 0.92 : 1)
+            .animation(.snappy(duration: 0.15), value: configuration.isPressed)
+    }
+}
+
+extension View {
+    /// Liquid Glass on macOS 26, translucent material on older systems.
+    @ViewBuilder fileprivate func glassBar() -> some View {
+        if #available(macOS 26.0, *) {
+            self.glassEffect(.regular, in: Capsule())
+        } else {
+            self.background(.regularMaterial, in: Capsule())
         }
     }
 }
