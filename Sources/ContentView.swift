@@ -141,6 +141,9 @@ struct ContentView: View {
             .help("Quit Kaomoji Bar")
             .keyboardShortcut("q")
         }
+        // Kaomoji glyphs have taller line boxes than the caption text.
+        // A fixed height keeps the bar from resizing between states.
+        .frame(height: 20)
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .glassBar()
