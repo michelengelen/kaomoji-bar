@@ -1,8 +1,5 @@
 import Foundation
 
-/// Chips shown per category while browsing. Search spans everything.
-let browseLimit = 120
-
 /// Chips shown for one search.
 let resultsLimit = 300
 
@@ -54,3 +51,9 @@ let allKaomoji: [Kaomoji] = categorizedKaomoji.flatMap(\.items)
 let searchIndex: [(item: Kaomoji, haystack: String)] = allKaomoji.map { item in
     (item, ([item.name, item.category] + item.keywords).joined(separator: " ").lowercased())
 }
+
+/// Lookup for the persisted recents and favorites lists.
+let kaomojiByChars: [String: Kaomoji] = Dictionary(
+    allKaomoji.map { ($0.chars, $0) },
+    uniquingKeysWith: { first, _ in first }
+)

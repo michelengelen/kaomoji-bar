@@ -17,9 +17,12 @@ echo "built: $PWD/$APP"
 # --install: replace the copy in /Applications and relaunch it.
 if [ "${1:-}" = "--install" ]; then
     pkill -x KaomojiBar || true
+    while pgrep -qx KaomojiBar; do sleep 0.2; done
     rm -rf "/Applications/$APP"
     ditto "$APP" "/Applications/$APP"
     rm -rf "$APP"
+    # Give Launch Services a moment to pick up the replaced bundle.
+    sleep 1
     open "/Applications/$APP"
     echo "installed: /Applications/$APP"
 fi

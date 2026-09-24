@@ -7,9 +7,12 @@ Type to search. Click a kaomoji to copy it to the clipboard.
 - Liquid Glass search and footer bars on macOS 26. Older systems fall
   back to standard translucent materials.
 - 8,243 kaomoji in 12 categories, each with an English name and
-  search keywords, plus a "Recently used" section (stored in
-  `UserDefaults`). Browsing shows the top 120 per category. Search
-  spans the whole dataset.
+  search keywords. Search spans the whole dataset.
+- Favorites view: `⌘`-click a kaomoji, or right-click it and choose
+  "Add to Favorites". Favorites carry a small star.
+- Collapsible category sections with counts. "Show more" reveals a
+  section in chunks. Expansion state persists.
+- "Recently used" section on top of the All view.
 - Press Return to copy the first search match.
 - Quit with the footer button or `⌘Q` while the popup is open.
 
