@@ -7,9 +7,10 @@ swift build -c release
 
 APP="Kaomoji Bar.app"
 rm -rf "$APP"
-mkdir -p "$APP/Contents/MacOS"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp Info.plist "$APP/Contents/Info.plist"
 cp .build/release/KaomojiBar "$APP/Contents/MacOS/KaomojiBar"
+cp -R .build/release/KaomojiBar_KaomojiBar.bundle "$APP/Contents/Resources/"
 codesign --force --sign - "$APP"
 echo "built: $PWD/$APP"
 

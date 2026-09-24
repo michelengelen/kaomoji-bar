@@ -1,117 +1,56 @@
-// Generated from mui-x docs/pages/playground/scratch/kaomoji-picker/data.ts.
-// Regenerate with gen-swift.cjs. Do not edit by hand.
+import Foundation
 
-let categoryOrder: [String] = [
-    "Happy",
-    "Love",
-    "Sad",
-    "Rage",
-    "Critters",
-    "Weird",
-]
+/// Chips shown per category while browsing. Search spans everything.
+let browseLimit = 120
 
-let allKaomoji: [Kaomoji] = [
-    Kaomoji(chars: "(＾▽＾)", name: "Beaming", keywords: ["smile", "joy"], category: "Happy"),
-    Kaomoji(chars: "(≧▽≦)", name: "Gleeful", keywords: ["smile", "joy", "laugh"], category: "Happy"),
-    Kaomoji(chars: "ヽ(´▽`)/", name: "Cheer", keywords: ["yay", "arms up"], category: "Happy"),
-    Kaomoji(chars: "\\(^o^)/", name: "Hooray", keywords: ["yay", "celebrate"], category: "Happy"),
-    Kaomoji(chars: "(￣▽￣)", name: "Smug smile", keywords: ["relaxed", "easy"], category: "Happy"),
-    Kaomoji(chars: "(◕‿◕)", name: "Cute smile", keywords: ["sweet", "kawaii"], category: "Happy"),
-    Kaomoji(chars: "(⌒‿⌒)", name: "Content", keywords: ["calm", "pleased"], category: "Happy"),
-    Kaomoji(chars: "o(≧▽≦)o", name: "Excited", keywords: ["thrilled", "happy"], category: "Happy"),
-    Kaomoji(chars: "٩(◕‿◕｡)۶", name: "Joyful jump", keywords: ["bounce", "yay"], category: "Happy"),
-    Kaomoji(chars: "(✯◡✯)", name: "Starry eyes", keywords: ["amazed", "fan"], category: "Happy"),
-    Kaomoji(chars: "(o˘◡˘o)", name: "Warm smile", keywords: ["cozy", "soft"], category: "Happy"),
-    Kaomoji(chars: "(´｡• ᵕ •｡`)", name: "Bashful", keywords: ["shy", "blush"], category: "Happy"),
-    Kaomoji(chars: "( ´ ▽ ` )ﾉ", name: "Friendly wave", keywords: ["hello", "hi", "greeting"], category: "Happy"),
-    Kaomoji(chars: "(＠＾◡＾)", name: "Cheerful hello", keywords: ["hi", "greeting"], category: "Happy"),
-    Kaomoji(chars: "ヽ(>∀<☆)ノ", name: "Ecstatic", keywords: ["star", "party"], category: "Happy"),
-    Kaomoji(chars: "♪(´▽｀)", name: "Humming", keywords: ["music", "song", "relaxed"], category: "Happy"),
-    Kaomoji(chars: "〜(￣▽￣〜)", name: "Dance left", keywords: ["dance", "groove"], category: "Happy"),
-    Kaomoji(chars: "(〜￣▽￣)〜", name: "Dance right", keywords: ["dance", "groove"], category: "Happy"),
-    Kaomoji(chars: "┏(＾0＾)┛", name: "Dance party", keywords: ["dance", "celebrate"], category: "Happy"),
-    Kaomoji(chars: "☆*:.｡.o(≧▽≦)o.｡.:*☆", name: "Sparkle joy", keywords: ["sparkles", "celebrate"], category: "Happy"),
-    Kaomoji(chars: "(♡°▽°♡)", name: "Love struck", keywords: ["heart", "crush"], category: "Love"),
-    Kaomoji(chars: "(｡♥‿♥｡)", name: "Heart eyes", keywords: ["adore", "heart"], category: "Love"),
-    Kaomoji(chars: "(´ ω `♡)", name: "Tender", keywords: ["soft", "heart"], category: "Love"),
-    Kaomoji(chars: "♡( ◡‿◡ )", name: "Sweet", keywords: ["gentle", "heart"], category: "Love"),
-    Kaomoji(chars: "(─‿‿─)♡", name: "In love", keywords: ["heart", "content"], category: "Love"),
-    Kaomoji(chars: "(´♡‿♡`)", name: "Adoring", keywords: ["heart", "eyes"], category: "Love"),
-    Kaomoji(chars: "(≧◡≦) ♡", name: "Blushing love", keywords: ["shy", "heart"], category: "Love"),
-    Kaomoji(chars: "(♥ω♥*)", name: "Smitten", keywords: ["heart", "crush"], category: "Love"),
-    Kaomoji(chars: "(´,,•ω•,,)♡", name: "Shy love", keywords: ["timid", "heart"], category: "Love"),
-    Kaomoji(chars: "Σ>―(〃°ω°〃)♡→", name: "Cupid arrow", keywords: ["arrow", "struck"], category: "Love"),
-    Kaomoji(chars: "(๑˘︶˘๑)", name: "Dreamy", keywords: ["peaceful", "sigh"], category: "Love"),
-    Kaomoji(chars: "(*≧ω≦*)", name: "Flustered", keywords: ["blush", "embarrassed"], category: "Love"),
-    Kaomoji(chars: "♡＼(￣▽￣)／♡", name: "Spreading love", keywords: ["hearts", "share"], category: "Love"),
-    Kaomoji(chars: "(>ω<)♡", name: "Squee", keywords: ["excited", "heart"], category: "Love"),
-    Kaomoji(chars: "(｡・//ε//・｡)", name: "Kiss", keywords: ["blush", "pucker"], category: "Love"),
-    Kaomoji(chars: "( ˘ ³˘)♥", name: "Smooch", keywords: ["kiss", "heart"], category: "Love"),
-    Kaomoji(chars: "(T_T)", name: "Crying", keywords: ["tears", "sad"], category: "Sad"),
-    Kaomoji(chars: "(;_;)", name: "Tearful", keywords: ["tears", "sad"], category: "Sad"),
-    Kaomoji(chars: "(ಥ﹏ಥ)", name: "Sobbing", keywords: ["tears", "crying"], category: "Sad"),
-    Kaomoji(chars: "(╥﹏╥)", name: "Weeping", keywords: ["tears", "crying"], category: "Sad"),
-    Kaomoji(chars: "｡ﾟ(ﾟ´ω`ﾟ)ﾟ｡", name: "Bawling", keywords: ["tears", "wailing"], category: "Sad"),
-    Kaomoji(chars: "(个_个)", name: "Tears", keywords: ["crying", "sad"], category: "Sad"),
-    Kaomoji(chars: "(μ_μ)", name: "Gloomy", keywords: ["down", "depressed"], category: "Sad"),
-    Kaomoji(chars: "(ノ_<。)", name: "Sniffle", keywords: ["tears", "upset"], category: "Sad"),
-    Kaomoji(chars: "(._.)", name: "Down", keywords: ["sad", "quiet"], category: "Sad"),
-    Kaomoji(chars: "(っ- ‸ - ς)", name: "Pouting", keywords: ["sulk", "upset"], category: "Sad"),
-    Kaomoji(chars: "(ノД`)・゜・。", name: "Wailing", keywords: ["crying", "dramatic"], category: "Sad"),
-    Kaomoji(chars: "(-_-;)", name: "Nervous sweat", keywords: ["awkward", "worried"], category: "Sad"),
-    Kaomoji(chars: "(´-ω-`)", name: "Sigh", keywords: ["tired", "resigned"], category: "Sad"),
-    Kaomoji(chars: "(￣︿￣)", name: "Sulking", keywords: ["grumpy", "displeased"], category: "Sad"),
-    Kaomoji(chars: "(；ω；)", name: "Misty eyes", keywords: ["tears", "touched"], category: "Sad"),
-    Kaomoji(chars: "(╯°□°）╯︵ ┻━┻", name: "Table flip", keywords: ["flip", "angry", "rage"], category: "Rage"),
-    Kaomoji(chars: "┬─┬ノ( º _ ºノ)", name: "Table restore", keywords: ["unflip", "calm", "put back"], category: "Rage"),
-    Kaomoji(chars: "┻━┻︵ヽ(`Д´)ﾉ︵ ┻━┻", name: "Double flip", keywords: ["tables", "rage"], category: "Rage"),
-    Kaomoji(chars: "(╬ Ò﹏Ó)", name: "Furious", keywords: ["angry", "mad"], category: "Rage"),
-    Kaomoji(chars: "(ノಠ益ಠ)ノ", name: "Rage lift", keywords: ["angry", "fury"], category: "Rage"),
-    Kaomoji(chars: "(¬_¬)", name: "Side eye", keywords: ["doubt", "judging"], category: "Rage"),
-    Kaomoji(chars: "(；一_一)", name: "Unamused", keywords: ["bored", "annoyed"], category: "Rage"),
-    Kaomoji(chars: "ヽ(ಠ_ಠ)ノ", name: "Disapproval", keywords: ["look", "stern"], category: "Rage"),
-    Kaomoji(chars: "(｀Δ´)！", name: "Scolding", keywords: ["angry", "shout"], category: "Rage"),
-    Kaomoji(chars: "ヾ(`ヘ´)ﾉﾞ", name: "Angry wave", keywords: ["mad", "shoo"], category: "Rage"),
-    Kaomoji(chars: "(¬▂¬)", name: "Shady", keywords: ["suspicious", "doubt"], category: "Rage"),
-    Kaomoji(chars: "(>_<)", name: "Frustrated", keywords: ["argh", "annoyed"], category: "Rage"),
-    Kaomoji(chars: "(￣ヘ￣)", name: "Hmph", keywords: ["grumpy", "pout"], category: "Rage"),
-    Kaomoji(chars: "୧((#Φ益Φ#))୨", name: "Demon rage", keywords: ["fury", "evil"], category: "Rage"),
-    Kaomoji(chars: "(ง'̀-'́)ง", name: "Fight me", keywords: ["fists", "ready", "boxing"], category: "Rage"),
-    Kaomoji(chars: "(¬､¬)", name: "Suspicious", keywords: ["doubt", "squint"], category: "Rage"),
-    Kaomoji(chars: "(=^･ω･^=)", name: "Cat face", keywords: ["cat", "kitty", "neko"], category: "Critters"),
-    Kaomoji(chars: "(=｀ω´=)", name: "Grumpy cat", keywords: ["cat", "annoyed"], category: "Critters"),
-    Kaomoji(chars: "ฅ^•ﻌ•^ฅ", name: "Cat paws", keywords: ["cat", "paws"], category: "Critters"),
-    Kaomoji(chars: "(^･o･^)ﾉ\"", name: "Cat wave", keywords: ["cat", "hello"], category: "Critters"),
-    Kaomoji(chars: "(=✧ω✧=)", name: "Excited cat", keywords: ["cat", "sparkle"], category: "Critters"),
-    Kaomoji(chars: "(＾• ω •＾)", name: "Kitty", keywords: ["cat", "cute"], category: "Critters"),
-    Kaomoji(chars: "(=^‥^=)", name: "Whiskers", keywords: ["cat"], category: "Critters"),
-    Kaomoji(chars: "ʕ •ᴥ•ʔ", name: "Bear", keywords: ["bear", "cute"], category: "Critters"),
-    Kaomoji(chars: "ʕ￫ᴥ￩ʔ", name: "Shifty bear", keywords: ["bear", "suspicious"], category: "Critters"),
-    Kaomoji(chars: "ʕっ•ᴥ•ʔっ", name: "Bear hug", keywords: ["bear", "hug"], category: "Critters"),
-    Kaomoji(chars: "ʕ •̀ o •́ ʔ", name: "Alert bear", keywords: ["bear", "surprised"], category: "Critters"),
-    Kaomoji(chars: "／(≧ x ≦)＼", name: "Rabbit", keywords: ["bunny", "rabbit"], category: "Critters"),
-    Kaomoji(chars: "／(・ × ・)＼", name: "Bunny", keywords: ["rabbit", "cute"], category: "Critters"),
-    Kaomoji(chars: "(・Θ・)", name: "Bird", keywords: ["bird", "penguin"], category: "Critters"),
-    Kaomoji(chars: "<コ:彡", name: "Squid", keywords: ["squid", "sea"], category: "Critters"),
-    Kaomoji(chars: "＜°)))彡", name: "Fish", keywords: ["fish", "sea"], category: "Critters"),
-    Kaomoji(chars: "¯\\_(ツ)_/¯", name: "Shrug", keywords: ["dunno", "whatever"], category: "Weird"),
-    Kaomoji(chars: "┐(￣ヘ￣)┌", name: "Shrug meh", keywords: ["dunno", "meh"], category: "Weird"),
-    Kaomoji(chars: "╮(╯_╰)╭", name: "Helpless", keywords: ["shrug", "oh well"], category: "Weird"),
-    Kaomoji(chars: "( ͡° ͜ʖ ͡°)", name: "Lenny", keywords: ["smirk", "meme"], category: "Weird"),
-    Kaomoji(chars: "( ͡~ ͜ʖ ͡°)", name: "Lenny wink", keywords: ["smirk", "wink"], category: "Weird"),
-    Kaomoji(chars: "(⊙_⊙)", name: "Wide eyes", keywords: ["surprised", "stare"], category: "Weird"),
-    Kaomoji(chars: "Σ(O_O)", name: "Shocked", keywords: ["surprise", "gasp"], category: "Weird"),
-    Kaomoji(chars: "(°ロ°) !", name: "Gasp", keywords: ["surprise", "shock"], category: "Weird"),
-    Kaomoji(chars: "ヽ(°〇°)ﾉ", name: "Mind blown", keywords: ["wow", "shock"], category: "Weird"),
-    Kaomoji(chars: "(∩｀-´)⊃━☆ﾟ.*･｡ﾟ", name: "Magic spell", keywords: ["wand", "wizard", "magic"], category: "Weird"),
-    Kaomoji(chars: "╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ", name: "Lenny wizard", keywords: ["magic", "meme"], category: "Weird"),
-    Kaomoji(chars: "(￣o￣) zzZZzzZZ", name: "Snoring", keywords: ["sleep", "zzz"], category: "Weird"),
-    Kaomoji(chars: "(∪｡∪)｡｡｡zzz", name: "Sleepy pup", keywords: ["sleep", "dog"], category: "Weird"),
-    Kaomoji(chars: "( ˘ω˘ )ｽﾔｧ", name: "Peaceful sleep", keywords: ["sleep", "nap"], category: "Weird"),
-    Kaomoji(chars: "(☞ﾟヮﾟ)☞", name: "Finger guns", keywords: ["point", "cool"], category: "Weird"),
-    Kaomoji(chars: "☜(ﾟヮﾟ☜)", name: "Finger guns left", keywords: ["point", "cool"], category: "Weird"),
-    Kaomoji(chars: "(⌐■_■)", name: "Sunglasses", keywords: ["cool", "shades"], category: "Weird"),
-    Kaomoji(chars: "( •_•)>⌐■-■", name: "Deal with it", keywords: ["shades", "cool", "meme"], category: "Weird"),
-    Kaomoji(chars: "(｀-´)>", name: "Salute", keywords: ["respect", "army"], category: "Weird"),
-    Kaomoji(chars: "ヾ(⌐■_■)ノ♪", name: "Cool dance", keywords: ["shades", "music", "dance"], category: "Weird"),
-]
+/// Chips shown for one search.
+let resultsLimit = 300
+
+private struct Dataset: Decodable {
+    struct Category: Decodable {
+        let id: String
+        let label: String
+        let items: [Item]
+    }
+
+    struct Item: Decodable {
+        let chars: String
+        let name: String
+        let keywords: [String]
+    }
+
+    let categories: [Category]
+}
+
+private let dataset: Dataset = {
+    guard let url = Bundle.module.url(forResource: "kaomoji", withExtension: "json"),
+          let data = try? Data(contentsOf: url),
+          let decoded = try? JSONDecoder().decode(Dataset.self, from: data)
+    else {
+        return Dataset(categories: [])
+    }
+    return decoded
+}()
+
+let categoryOrder: [String] = dataset.categories.map(\.label)
+
+let categorizedKaomoji: [(label: String, items: [Kaomoji])] = dataset.categories.map { category in
+    (
+        label: category.label,
+        items: category.items.map { item in
+            Kaomoji(
+                chars: item.chars,
+                name: item.name,
+                keywords: item.keywords,
+                category: category.label
+            )
+        }
+    )
+}
+
+let allKaomoji: [Kaomoji] = categorizedKaomoji.flatMap(\.items)
+
+/// Precomputed lowercase search text per kaomoji.
+let searchIndex: [(item: Kaomoji, haystack: String)] = allKaomoji.map { item in
+    (item, ([item.name, item.category] + item.keywords).joined(separator: " ").lowercased())
+}

@@ -5,6 +5,10 @@ let package = Package(
     name: "KaomojiBar",
     platforms: [.macOS(.v14)],
     targets: [
-        .executableTarget(name: "KaomojiBar", path: "Sources")
+        .executableTarget(
+            name: "KaomojiBar",
+            path: "Sources",
+            resources: [.copy("kaomoji.json")]
+        )
     ]
 )

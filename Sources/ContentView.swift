@@ -27,17 +27,14 @@ struct ContentView: View {
             .split(whereSeparator: \.isWhitespace)
             .map(String.init)
         guard !words.isEmpty else { return nil }
-        return allKaomoji.filter { item in
-            let haystack = ([item.name, item.category] + item.keywords)
-                .joined(separator: " ")
-                .lowercased()
-            return words.allSatisfy { haystack.contains($0) }
-        }
+        return searchIndex
+            .filter { entry in words.allSatisfy { entry.haystack.contains($0) } }
+            .map(\.item)
     }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
+            LazyVStack(alignment: .leading, spacing: 14) {
                 if let results {
                     if results.isEmpty {
                         Text("No matches")
@@ -48,15 +45,16 @@ struct ContentView: View {
                     } else {
                         section(
                             results.count == 1 ? "1 match" : "\(results.count) matches",
-                            items: results
+                            items: results,
+                            limit: resultsLimit
                         )
                     }
                 } else {
                     if !recents.isEmpty {
                         section("Recently used", items: recents)
                     }
-                    ForEach(categoryOrder, id: \.self) { category in
-                        section(category, items: allKaomoji.filter { $0.category == category })
+                    ForEach(categorizedKaomoji, id: \.label) { category in
+                        section(category.label, items: category.items, limit: browseLimit)
                     }
                 }
             }
@@ -149,14 +147,15 @@ struct ContentView: View {
         .glassBar()
     }
 
-    private func section(_ title: String, items: [Kaomoji]) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    private func section(_ title: String, items: [Kaomoji], limit: Int? = nil) -> some View {
+        let shown = limit.map { Array(items.prefix($0)) } ?? items
+        return VStack(alignment: .leading, spacing: 6) {
             Text(title.uppercased())
                 .font(.system(size: 10, weight: .semibold))
                 .kerning(0.6)
                 .foregroundStyle(.tertiary)
             FlowLayout(spacing: 4) {
-                ForEach(items) { item in
+                ForEach(shown) { item in
                     ChipButton(item: item) {
                         copy(item)
                     } onHover: { hovering in
@@ -167,6 +166,11 @@ struct ContentView: View {
                         }
                     }
                 }
+            }
+            if shown.count < items.count {
+                Text("\(items.count - shown.count) more. Use the search to reach them.")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.tertiary)
             }
         }
     }
